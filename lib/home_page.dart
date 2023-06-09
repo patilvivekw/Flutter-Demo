@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
+import 'package:flutter_demo/results_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'widgets.dart';
@@ -190,36 +191,16 @@ class _MyHomePageState extends State<MyHomePage> {
               )),
             ],
           )),
-          Container(
-            color: kBottomContainerColor,
-            margin: const EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-          )
+          BMIPrimaryButton(
+            buttonTitle: 'Calculate',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ResultsPage()),
+              );
+            },
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({super.key, required this.icon, required this.onPress});
-
-  final IconData icon;
-  final VoidCallback onPress;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      elevation: 6.0,
-      disabledElevation: 6.0,
-      constraints: const BoxConstraints.tightFor(width: 56.0, height: 56.0),
-      shape: const CircleBorder(),
-      fillColor: const Color(0xFF4C4F5E),
-      onPressed: onPress,
-      child: Icon(
-        icon,
-        color: Colors.white,
       ),
     );
   }
