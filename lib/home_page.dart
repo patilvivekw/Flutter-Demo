@@ -19,6 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Gender selectedGender = Gender.male;
   int height = 180;
   int weight = 60;
+  int age = 19;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +147,47 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               )),
-              const Expanded(child: ReusableCard(color: kActiveCardColor)),
+              Expanded(
+                  child: ReusableCard(
+                color: kActiveCardColor,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Age",
+                      style: kLabelTextStyle,
+                    ),
+                    Text(
+                      age.toString(),
+                      style: kNumberTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RoundIconButton(
+                          icon: FontAwesomeIcons.minus,
+                          onPress: () {
+                            setState(() {
+                              age = age > 0 ? age - 1 : age;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        RoundIconButton(
+                          icon: FontAwesomeIcons.plus,
+                          onPress: () {
+                            setState(() {
+                              age = age + 1;
+                            });
+                          },
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )),
             ],
           )),
           Container(
