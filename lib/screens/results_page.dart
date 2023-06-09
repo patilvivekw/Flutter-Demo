@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/components/widgets.dart';
 import 'package:flutter_demo/constants.dart';
-import 'package:flutter_demo/widgets.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({super.key});
@@ -17,6 +17,8 @@ class ResultsPage extends StatelessWidget {
         children: [
           Expanded(
               child: Container(
+            padding: const EdgeInsets.all(15.0),
+            alignment: Alignment.bottomLeft,
             child: const Text(
               "Your Result",
               style: kTitleTextStyle,
