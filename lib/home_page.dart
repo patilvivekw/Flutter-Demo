@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'widgets.dart';
 
 const bottomContainerHeight = 80.0;
 const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
 const bottomContainerColor = Color(0xFFEB1555);
+
+enum Gender { male, female }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -14,6 +20,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Gender selectedGender = Gender.male;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,11 +30,38 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
               child: Row(
             children: [
-              Expanded(child: ReusableCard(color: activeCardColor)),
-              Expanded(child: ReusableCard(color: activeCardColor)),
+              Expanded(
+                  child: ReusableCard(
+                      color: selectedGender == Gender.male
+                          ? activeCardColor
+                          : inactiveCardColor,
+                      cardChild: const IconContent(
+                        icon: FontAwesomeIcons.mars,
+                        label: "Male",
+                      ),
+                      onPress: () {
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
+                      })),
+              Expanded(
+                  child: ReusableCard(
+                color: selectedGender == Gender.female
+                    ? activeCardColor
+                    : inactiveCardColor,
+                cardChild: const IconContent(
+                  icon: FontAwesomeIcons.venus,
+                  label: "Female",
+                ),
+                onPress: () {
+                  setState(() {
+                    selectedGender = Gender.female;
+                  });
+                },
+              )),
             ],
           )),
           const Expanded(child: ReusableCard(color: activeCardColor)),
@@ -45,23 +80,6 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  const ReusableCard({super.key, required this.color, this.cardChild});
-
-  final Color color;
-  final Widget? cardChild;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-          color: color, borderRadius: BorderRadius.circular(10.0)),
-      child: cardChild,
     );
   }
 }
