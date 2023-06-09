@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/constants.dart';
+import 'package:flutter_demo/screens/bmi_calculator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../components/widgets.dart';
@@ -194,9 +195,16 @@ class _MyHomePageState extends State<MyHomePage> {
           BMIPrimaryButton(
             buttonTitle: 'Calculate',
             onTap: () {
+              BMICalculator calc = BMICalculator(height, weight);
+
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ResultsPage()),
+                MaterialPageRoute(
+                    builder: (context) => ResultsPage(
+                          bmiResult: calc.calculate(),
+                          resultText: calc.getResult(),
+                          interpretation: calc.getInterpretation(),
+                        )),
               );
             },
           ),
